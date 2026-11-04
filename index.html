@@ -102,7 +102,7 @@ footer b{color:var(--accent)}
 .stats small{color:var(--muted);font-size:.85rem}
 .arch{position:relative;aspect-ratio:4/5;max-width:440px;width:100%;justify-self:end}
 .arch::before{content:"";position:absolute;inset:6% 0 0;border-radius:999px 999px 0 0;background:var(--pink);border:2px solid var(--line);border-bottom:none}
-.arch img{position:absolute;bottom:0;left:4%;width:92%;height:auto}
+.arch img{position:absolute;bottom:0;left:4%;width:92%;height:auto;max-width:none}
 .arch .chip{position:absolute;left:-18px;bottom:44px;background:var(--surface);border:2px solid var(--line);border-radius:12px;box-shadow:4px 4px 0 var(--pink);padding:8px 14px;font-weight:600;font-size:.9rem}
 .spark{position:absolute;font-family:var(--display);color:var(--rose);font-size:2.4rem;pointer-events:none}
 @media (max-width:860px){
@@ -117,7 +117,7 @@ footer b{color:var(--accent)}
 /* about */
 .about{display:grid;grid-template-columns:260px minmax(0,1.3fr) repeat(3,minmax(0,1fr));gap:22px;align-items:start}
 .photo{border:2px solid var(--line);border-radius:16px;background:var(--pink);box-shadow:5px 5px 0 var(--accent);overflow:hidden;aspect-ratio:3/4;position:relative}
-.photo img{position:absolute;bottom:0;left:-2%;width:104%}
+.photo img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:center top}
 .about .story p+p{margin-top:12px}
 .about .story,.about .col{color:var(--muted);font-size:.95rem}
 .about .story b,.col b{color:var(--ink)}
