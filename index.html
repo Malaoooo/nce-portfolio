@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NCE Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Portfolio of Nicole Camacho Edades, BSIT student: projects, skills, certificates and contact.">
+<style>
+@font-face{font-family:"Jersey 10";src:url(assets/fonts/jersey-10-latin-400-normal.woff2) format("woff2");font-display:swap;size-adjust:128%}
+@font-face{font-family:"Poppins";src:url(assets/fonts/poppins-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Poppins";src:url(assets/fonts/poppins-latin-500-normal.woff2) format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"Poppins";src:url(assets/fonts/poppins-latin-600-normal.woff2) format("woff2");font-weight:600 700;font-display:swap}
+[hidden]{display:none!important}
+/* Layout: one-page app, six hash-routed views under a sticky pill nav; window-card motif from the sitemap */
+:root{
+  --bg:#FFF8F5; --surface:#FFFFFF; --tint:#FBE4EC; --pink:#F2B8CB; --rose:#E07FA3;
+  --accent:#A8406A; --accent-press:#8E3358; --on-accent:#FFFFFF;
+  --ink:#3B2330; --muted:#6E5560; --sand:#EFE6E1; --lilac:#C9B8F0; --lilac-tint:#F4F0FD; --line:#3B2330;
+  --error:#B3261E; --ok:#2E7D32;
+  --display:"Jersey 10","Poppins",system-ui,sans-serif;
+  --body:"Poppins",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --r:14px; --shadow:5px 5px 0 var(--pink);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#1E141A; --surface:#2A1D25; --tint:#3A2531; --pink:#6E3A52; --rose:#E58FB0;
+  --accent:#F08CB4; --accent-press:#F6A9C7; --on-accent:#2A0F1C;
+  --ink:#F7E9EF; --muted:#CDB6C1; --sand:#251A20; --lilac:#8E7BCF; --lilac-tint:#2C2538; --line:#E9D3DD;
+  --error:#FF8A80; --ok:#81C784; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1E141A; --surface:#2A1D25; --tint:#3A2531; --pink:#6E3A52; --rose:#E58FB0;
+  --accent:#F08CB4; --accent-press:#F6A9C7; --on-accent:#2A0F1C;
+  --ink:#F7E9EF; --muted:#CDB6C1; --sand:#251A20; --lilac:#8E7BCF; --lilac-tint:#2C2538; --line:#E9D3DD;
+  --error:#FF8A80; --ok:#81C784; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--surface)}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.05;margin:0;text-wrap:balance;letter-spacing:.01em}
+p{margin:0}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1200px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.skip{position:absolute;left:-999px;top:8px;background:var(--accent);color:var(--on-accent);padding:8px 14px;border-radius:8px;z-index:50}
+.skip:focus{left:16px}
+
+/* nav */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);border-bottom:2px solid var(--tint)}
+.navbar{display:flex;align-items:center;gap:16px;min-height:72px}
+.logo{display:flex;align-items:center;gap:10px;white-space:nowrap;font-family:var(--display);font-size:1.75rem;color:var(--ink);text-decoration:none}
+.logo svg{flex:none}
+.links{display:flex;gap:4px;margin:0 0 0 auto;padding:0;list-style:none}
+.links a{display:block;padding:8px 16px;border-radius:999px;color:var(--ink);text-decoration:none;font-size:.95rem}
+.links a:hover{background:var(--tint)}
+.links a[aria-current="page"]{background:var(--accent);color:var(--on-accent);font-weight:600}
+.burger{display:none;margin-left:auto;width:44px;height:44px;border:2px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);box-shadow:3px 3px 0 var(--pink);cursor:pointer;place-items:center}
+.theme{width:40px;height:40px;border-radius:999px;border:2px solid var(--tint);background:var(--surface);color:var(--ink);cursor:pointer;display:grid;place-items:center;flex:none}
+@media (max-width:860px){
+  .burger{display:grid}
+  .links{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;background:var(--surface);border-bottom:2px solid var(--tint);padding:10px max(16px,env(safe-area-inset-right,0px)) 16px max(16px,env(safe-area-inset-left,0px))}
+  .links.open{display:flex}
+  .links a{padding:12px 16px}
+  .logo{font-size:1.45rem}
+}
+
+/* shared */
+main{padding-block:44px 64px;min-height:calc(100vh - 140px)}
+.view[hidden]{display:none!important}
+.view{animation:rise .35s ease both}
+@keyframes rise{from{transform:translateY(8px)}to{transform:none}}
+@media (prefers-reduced-motion:reduce){.view{animation:none}*{transition:none!important}}
+.eyebrow{display:inline-block;font-size:.8rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.title{font-size:clamp(2.4rem,5vw,3.2rem)}
+.title .h{color:var(--rose)}
+.lede{color:var(--muted);margin-top:6px;margin-bottom:28px;max-width:62ch}
+.win{background:var(--surface);border:2px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden;min-width:0}
+.bar{height:32px;background:var(--tint);border-bottom:2px solid var(--line);display:flex;align-items:center;gap:6px;padding:0 12px;font-family:var(--display);font-size:1.05rem}
+.bar i{width:11px;height:11px;border-radius:50%;border:1.5px solid var(--line);background:var(--surface)}
+.bar i:nth-child(2){background:var(--pink)}.bar i:nth-child(3){background:var(--lilac)}
+.bar span{margin-left:6px}
+.pad{padding:20px 22px}
+.btn{display:inline-flex;align-items:center;gap:8px;font:600 .95rem var(--body);padding:12px 22px;border-radius:12px;border:2px solid var(--line);box-shadow:4px 4px 0 var(--line);text-decoration:none;cursor:pointer;transition:transform .12s,box-shadow .12s}
+.btn:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--line)}
+.btn.pri{background:var(--accent);color:var(--on-accent)}
+.btn.pri:hover{background:var(--accent-press)}
+.btn.sec{background:var(--surface);color:var(--ink)}
+.tag{display:inline-block;font-size:.8rem;font-weight:500;padding:5px 12px;border-radius:999px;background:var(--tint);border:1.5px solid var(--pink);color:var(--ink)}
+.tag.l{background:var(--lilac-tint);border-color:var(--lilac)}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.icbox{width:46px;height:46px;border-radius:12px;background:var(--tint);border:2px solid var(--pink);display:grid;place-items:center;color:var(--accent);flex:none}
+footer{background:var(--sand);color:var(--muted);font-size:.85rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;padding-block:18px}
+footer b{color:var(--accent)}
+
+/* home */
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+.hero h1{font-size:clamp(2.8rem,6.5vw,4.6rem);margin:14px 0 18px}
+.hero .lede{font-size:1.08rem}
+.ctas{display:flex;flex-wrap:wrap;gap:16px}
+.stats{display:grid;grid-template-columns:1fr 1fr 1.4fr;gap:16px;margin-top:40px}
+.stats .win .pad{padding:14px 16px}
+.stats b{font-family:var(--display);font-size:2.2rem;font-weight:400;color:var(--accent);line-height:1;display:block}
+.stats small{color:var(--muted);font-size:.85rem}
+.arch{position:relative;aspect-ratio:4/5;max-width:440px;width:100%;justify-self:end}
+.arch::before{content:"";position:absolute;inset:6% 0 0;border-radius:999px 999px 0 0;background:var(--pink);border:2px solid var(--line);border-bottom:none}
+.arch img{position:absolute;bottom:0;left:4%;width:92%;height:auto}
+.arch .chip{position:absolute;left:-18px;bottom:44px;background:var(--surface);border:2px solid var(--line);border-radius:12px;box-shadow:4px 4px 0 var(--pink);padding:8px 14px;font-weight:600;font-size:.9rem}
+.spark{position:absolute;font-family:var(--display);color:var(--rose);font-size:2.4rem;pointer-events:none}
+@media (max-width:860px){
+  .hero{grid-template-columns:1fr;text-align:center}
+  .hero .arch{order:-1;justify-self:center;max-width:240px;aspect-ratio:1;border-radius:50%;overflow:hidden;border:2px solid var(--line);background:var(--pink)}
+  .hero .arch::before,.hero .arch .chip,.hero .spark{display:none}
+  .hero .arch img{left:0;width:100%;top:4%;bottom:auto}
+  .hero .lede{margin-inline:auto}.ctas{justify-content:center}
+  .stats{grid-template-columns:1fr 1fr;text-align:left}.stats .feat{grid-column:1/-1}
+}
+
+/* about */
+.about{display:grid;grid-template-columns:260px minmax(0,1.3fr) repeat(3,minmax(0,1fr));gap:22px;align-items:start}
+.photo{border:2px solid var(--line);border-radius:16px;background:var(--pink);box-shadow:5px 5px 0 var(--accent);overflow:hidden;aspect-ratio:3/4;position:relative}
+.photo img{position:absolute;bottom:0;left:-2%;width:104%}
+.about .story p+p{margin-top:12px}
+.about .story,.about .col{color:var(--muted);font-size:.95rem}
+.about .story b,.col b{color:var(--ink)}
+.col h3{font-size:1.6rem;margin:12px 0 8px;color:var(--ink)}
+.col ul{margin:0;padding-left:1.1em}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:30px}
+.facts .pad{display:flex;align-items:center;gap:14px;padding:14px 18px;font-size:.9rem;color:var(--muted)}
+.facts .pad b{display:block;color:var(--ink)}
+.facts .cta{background:var(--accent);color:var(--on-accent);text-decoration:none;justify-content:space-between}
+.facts .cta b,.facts .cta{color:var(--on-accent)}
+@media (max-width:1060px){.about{grid-template-columns:220px 1fr}.about .col{grid-column:auto}.facts{grid-template-columns:1fr 1fr}}
+@media (max-width:620px){.about{grid-template-columns:1fr}.photo{max-width:260px}.facts{grid-template-columns:1fr}}
+
+/* skills */
+.sk{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding:20px 22px}
+.sk>div{background:var(--bg);border:1.5px solid var(--tint);border-radius:12px;padding:18px;min-width:0}
+.sk.soft>div{background:var(--lilac-tint);border-color:var(--lilac)}
+.sk h3{font-size:1.5rem;display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.sk svg{color:var(--accent);flex:none}.sk.soft svg{color:var(--lilac)}
+.sk p{font-size:.88rem;color:var(--muted);margin-top:10px}
+.learning{margin-top:22px;display:flex;flex-wrap:wrap;align-items:center;gap:12px;background:var(--tint);border:2px dashed var(--rose);border-radius:14px;padding:16px 22px}
+.learning h3{font-size:1.6rem}
+.learning small{margin-left:auto;color:var(--muted)}
+@media (max-width:960px){.sk{grid-template-columns:1fr 1fr}}
+@media (max-width:540px){.sk{grid-template-columns:1fr}.learning small{margin-left:0}}
+
+/* projects */
+.ph{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.filters button{font:500 .85rem var(--body);padding:7px 16px;border-radius:999px;border:1.5px solid var(--pink);background:var(--tint);color:var(--ink);cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:22px}
+.pcard{all:unset;box-sizing:border-box;cursor:pointer;display:block;background:var(--surface);border:2px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:4px 4px 0 var(--pink);transition:transform .15s,box-shadow .15s}
+.pcard:hover{transform:translateY(-4px);box-shadow:6px 8px 0 var(--rose)}
+.pcard:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.thumb{display:block;width:100%;aspect-ratio:10/7;border-bottom:2px solid var(--line)}
+.pcard .t{display:block;padding:10px 14px 12px}
+.pcard b{display:block;font-size:.95rem}
+.pcard small{color:var(--muted);font-size:.8rem}
+
+/* modal */
+.modal{position:fixed;inset:0;z-index:40;background:rgba(30,15,25,.55);display:grid;place-items:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.modal .win{width:min(640px,100%);max-height:100%;overflow:auto}
+.modal .bar button{margin-left:auto;background:none;border:none;color:var(--ink);font:600 1.3rem var(--body);cursor:pointer;width:32px;height:28px}
+.modal h3{font-size:2rem;margin-bottom:6px}
+#m-thumb .thumb{max-height:260px}
+.modal p{color:var(--muted);margin:10px 0 18px}
+
+/* certs */
+.cgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
+.ccard{background:var(--surface);border:2px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:5px 5px 0 var(--pink);display:flex;flex-direction:column}
+.ccard .thumb{aspect-ratio:6/5}
+.ccard .d{padding:18px 20px;background:var(--sand);flex:1}
+.ccard h3{font-size:1.6rem;margin-bottom:6px}
+.ccard p{font-size:.88rem;color:var(--muted)}
+.ccard .yr{font-size:.8rem;color:var(--accent);font-weight:600;margin-top:10px}
+@media (max-width:1000px){.cgrid{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.cgrid{gap:14px}.ccard .d{padding:12px}.ccard h3{font-size:1.25rem}.ccard p{display:none}}
+
+/* contact */
+.contact{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:36px;align-items:start}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+label{display:block;font-size:.9rem;font-weight:600;margin-bottom:6px}
+label em{color:var(--accent);font-style:normal}
+input,textarea{width:100%;font:inherit;font-size:.95rem;color:var(--ink);background:var(--surface);border:2px solid var(--line);border-radius:10px;padding:11px 14px;margin-bottom:4px}
+textarea{min-height:170px;resize:vertical}
+input:focus,textarea:focus{outline:3px solid var(--accent);outline-offset:2px}
+input[aria-invalid="true"],textarea[aria-invalid="true"]{border-color:var(--error)}
+.err{color:var(--error);font-size:.82rem;min-height:1.3em;margin-bottom:8px}
+.formfoot{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-top:6px}
+.formfoot small{color:var(--muted)}
+.sent{margin-top:16px;padding:14px 16px;border-radius:12px;background:var(--tint);border:1.5px solid var(--pink);font-size:.9rem}
+.sent .copy{margin-top:10px}
+.socials{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:18px 20px}
+.social{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;background:var(--bg);border:1.5px solid var(--tint);color:var(--ink);text-decoration:none;min-width:0}
+a.social:hover{border-color:var(--rose)}
+.social .icbox{width:38px;height:38px;border-radius:10px}
+.social b{display:block;font-size:.85rem}
+.social small{display:block;font-size:.8rem;color:var(--muted);overflow-wrap:anywhere;user-select:all}
+@media (max-width:860px){.contact{grid-template-columns:1fr}}
+@media (max-width:480px){.row2,.socials{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+
+<a class="skip" href="#main">Skip to content</a>
+<header>
+  <div class="wrap navbar">
+    <a class="logo" href="#home" aria-label="NCE Portfolio, home">
+      <svg width="40" height="31" viewBox="0 0 44 34" aria-hidden="true"><path d="M2 6a4 4 0 0 1 4-4h11l4 4h17a4 4 0 0 1 4 4v18a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4Z" fill="var(--pink)" stroke="var(--line)" stroke-width="2"/><path d="M2 12h40" stroke="var(--line)" stroke-width="2"/><path d="M22 18c-1.5-2.5-5-1.5-5 1 0 2 5 5 5 5s5-3 5-5c0-2.5-3.5-3.5-5-1Z" fill="var(--accent)"/></svg>
+      NCE Portfolio</a>
+    <nav aria-label="Main"><ul class="links" id="links"></ul></nav>
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="links" aria-label="Open menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <button class="theme" id="theme" aria-label="Switch color theme" title="Switch color theme"></button>
+  </div>
+</header>
+
+<main id="main" class="wrap" tabindex="-1">
+
+<!-- HOME -->
+<section class="view" id="v-home" aria-labelledby="h-home">
+  <div class="hero">
+    <div>
+      <span class="tag">♥ BSIT student · open to OJT</span>
+      <h1 id="h-home">Hello, I'm Nicole Camacho Edades!</h1>
+      <p class="lede">I'm a first-year IT student who likes building cute, useful things for the web, from small games to systems that help my school run smoother. This is where I keep my projects, skills and certificates.</p>
+      <div class="ctas"><a class="btn pri" href="#projects">View my projects →</a><a class="btn sec" href="#about">About me</a></div>
+      <div class="stats">
+        <div class="win"><div class="pad"><b>10</b><small>projects built</small></div></div>
+        <div class="win"><div class="pad"><b>4</b><small>certificates &amp; awards</small></div></div>
+        <a class="win feat" href="#projects" data-open="9" style="text-decoration:none;color:inherit"><div class="pad"><b style="font-size:1.6rem;color:var(--ink)">Featured: PasaU</b><small>student-only marketplace →</small></div></a>
+      </div>
+    </div>
+    <div class="arch">
+      <img src="assets/portrait.png" alt="Nicole Camacho Edades in her graduation toga and stole" width="459" height="643">
+      <span class="chip">🎓 BSIT 1N-B</span>
+      <span class="spark" style="right:-6px;top:0" aria-hidden="true">✦</span>
+      <span class="spark" style="left:-30px;top:16%;color:var(--lilac);font-size:1.6rem" aria-hidden="true">✦</span>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="view" id="v-about" aria-labelledby="h-about" hidden>
+  <h2 class="title" id="h-about">About me <span class="h">♥</span></h2>
+  <p class="lede">A little about who I am, where I study, and where I'm headed.</p>
+  <div class="about">
+    <div class="photo"><img src="assets/portrait.png" alt="Portrait of Nicole" width="459" height="643"></div>
+    <div class="win"><div class="bar"><i></i><i></i><i></i><span>hello.txt</span></div>
+      <div class="pad story">
+        <p>Hi! I'm <b>Nicole</b>, an IT student who enjoys the part of programming where something finally <i>looks</i> right on screen.</p>
+        <p>I started with simple HTML pages and kept going: a calculator, a POS system, two small games, and PasaU, a marketplace for students. I learn best by making things for people I know.</p>
+        <p>Outside class I'm on the cheerleading squad, which taught me a lot about practice and teamwork.</p>
+      </div></div>
+    <div class="win col"><div class="bar"><i></i><i></i><i></i></div><div class="pad"><div class="icbox" data-i="cap"></div><h3>Education</h3><p><b>BS Information Technology</b><br>1st year · Section 1N-B</p><p style="margin-top:10px"><b>Senior High School</b><br>ICT strand graduate, with work immersion and TESDA training.</p></div></div>
+    <div class="win col"><div class="bar"><i></i><i></i><i></i></div><div class="pad"><div class="icbox" data-i="star"></div><h3>Interests</h3><ul><li>UI and web design</li><li>Making small games</li><li>Cute pixel-style art</li><li>Cheerleading</li><li>Building tools for my school</li></ul></div></div>
+    <div class="win col"><div class="bar"><i></i><i></i><i></i></div><div class="pad"><div class="icbox" data-i="target"></div><h3>Career Goals</h3><p>Become a <b>front-end / UI developer</b> who designs interfaces that are pretty <i>and</i> easy to use.</p><p style="margin-top:10px">Short term: land an OJT where I can work on real websites.</p></div></div>
+  </div>
+  <div class="facts">
+    <div class="win"><div class="pad"><span class="icbox" data-i="home"></span><span><b>Based in</b>the Philippines</span></div></div>
+    <div class="win"><div class="pad"><span class="icbox" data-i="heart"></span><span><b>Favorite project</b>PasaU marketplace</span></div></div>
+    <div class="win"><div class="pad"><span class="icbox" data-i="code"></span><span><b>Learning now</b>React &amp; UI accessibility</span></div></div>
+    <a class="win" href="#contact" style="text-decoration:none"><div class="pad cta"><span><b>Want to work together?</b>Say hi on the Contact page</span><span style="font-family:var(--display);font-size:1.8rem">→</span></div></a>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="view" id="v-skills" aria-labelledby="h-skills" hidden>
+  <h2 class="title" id="h-skills">My Skills <span class="h">✦</span></h2>
+  <p class="lede">What I can build with, and how I work with people.</p>
+  <div class="win"><div class="bar"><i></i><i></i><i></i><span>technical_skills</span></div><div class="sk" id="tech"></div></div>
+  <div class="win" style="margin-top:22px"><div class="bar"><i></i><i></i><i></i><span>other_skills</span></div><div class="sk soft" id="soft"></div></div>
+  <div class="learning"><h3>Currently learning ✦</h3><span class="tag l">React</span><span class="tag l">Git &amp; GitHub</span><span class="tag l">UI accessibility</span><span class="tag l">PHP</span><small>Skills are self-assessed and grow with every project.</small></div>
+</section>
+
+<!-- PROJECTS -->
+<section class="view" id="v-projects" aria-labelledby="h-projects" hidden>
+  <div class="ph"><div><h2 class="title" id="h-projects">My Projects <span class="h">♥</span></h2><p class="lede" style="margin-bottom:18px">Tap any card to see what it does and where the code lives.</p></div>
+    <div class="filters" role="group" aria-label="Filter projects" id="filters"></div></div>
+  <div class="pgrid" id="pgrid"></div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section class="view" id="v-achievements" aria-labelledby="h-ach" hidden>
+  <h2 class="title" id="h-ach">Certificates &amp; Achievements <span class="h">✦</span></h2>
+  <p class="lede">Proof of the hours, the training and the teamwork.</p>
+  <div class="cgrid" id="cgrid"></div>
+</section>
+
+<!-- CONTACT -->
+<section class="view" id="v-contact" aria-labelledby="h-contact" hidden>
+  <h2 class="title" id="h-contact">Let's Connect <span class="h">♥</span></h2>
+  <p class="lede">For projects, OJT, or just to say hi. I usually reply within a day.</p>
+  <div class="contact">
+    <div class="win"><div class="bar"><i></i><i></i><i></i><span>new_message</span></div>
+      <form class="pad" id="form" novalidate>
+        <div class="row2">
+          <div><label for="f-name">Name <em>*</em></label><input id="f-name" name="name" autocomplete="name" placeholder="Your name" aria-describedby="e-name"><div class="err" id="e-name"></div></div>
+          <div><label for="f-email">Email <em>*</em></label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="you@email.com" aria-describedby="e-email"><div class="err" id="e-email"></div></div>
+        </div>
+        <label for="f-msg">Message <em>*</em></label><textarea id="f-msg" name="message" placeholder="Write your message here…" aria-describedby="e-msg"></textarea><div class="err" id="e-msg"></div>
+        <div class="formfoot"><small><em style="color:var(--accent);font-style:normal">*</em> required</small><button class="btn pri" type="submit">Send message ✉</button></div>
+        <div class="sent" id="sent" role="status" hidden></div>
+      </form></div>
+    <div class="win"><div class="bar"><i></i><i></i><i></i><span>follow_me</span></div><div class="socials" id="socials"></div></div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap"><span>© 2026 Nicole Camacho Edades · BSIT 1N-B</span><span>Made with <b>♥</b> and a lot of practice</span></div></footer>
+
+<div class="modal" id="modal" hidden role="dialog" aria-modal="true" aria-labelledby="m-title">
+  <div class="win"><div class="bar"><i></i><i></i><i></i><span id="m-file">project</span><button id="m-close" aria-label="Close">×</button></div>
+    <div id="m-thumb"></div><div class="pad"><h3 id="m-title"></h3><div class="tags" id="m-tags"></div><p id="m-desc"></p><a class="btn pri" id="m-code" href="https://github.com/nekuuul" target="_blank" rel="noopener">View code on GitHub ↗</a></div></div>
+</div>
+
+<script>
+(function(){
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const VIEWS=[['home','Home'],['about','About'],['skills','Skills'],['projects','Projects'],['achievements','Achievements'],['contact','Contact']];
+const I={home:'<path d="M3 11 12 4l9 7v9H3Z"/><path d="M10 20v-5h4v5"/>',user:'<circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/>',code:'<path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/>',folder:'<path d="M3 6h6l2 2h10v11H3Z"/>',trophy:'<path d="M7 4h10v5a5 5 0 0 1-10 0Z"/><path d="M7 6H4v2a3 3 0 0 0 3 3M17 6h3v2a3 3 0 0 1-3 3M12 14v4M8 20h8"/>',mail:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',cap:'<path d="m2 9 10-5 10 5-10 5Z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/>',star:'<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9Z"/>',target:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r=".8"/>',chat:'<path d="M4 5h16v11H9l-5 4Z"/>',camera:'<rect x="3" y="7" width="18" height="13" rx="3"/><circle cx="12" cy="13.5" r="3.5"/><path d="M9 7l1.5-3h3L15 7"/>',note:'<path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/>',brief:'<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V4h6v3M3 12h18"/>',git:'<circle cx="6" cy="5" r="2"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="9" r="2"/><path d="M6 7v10M18 11c0 4-6 3-11 6"/>',headset:'<path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/>',heart:'<path d="M12 20s-8-5-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 9c0 6-8 11-8 11Z"/>',sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',moon:'<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/>'};
+const ico=(n,s=22)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I[n]}</svg>`;
+$$('[data-i]').forEach(e=>e.innerHTML=ico(e.dataset.i,24));
+
+// palette used inside illustrations follows the theme
+const st='stroke="var(--line)" stroke-width="2.5"';
+const S=(inner,bg='var(--tint)')=>`<svg class="thumb" viewBox="0 0 200 140" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="200" height="140" fill="${bg}"/>${inner}</svg>`;
+const W='var(--surface)',P='var(--pink)',R='var(--rose)',A='var(--accent)',L='var(--lilac)',K='var(--line)';
+let qr='';{let s=7;const r=()=>(s=(s*9301+49297)%233280)/233280;for(let y=0;y<9;y++)for(let x=0;x<9;x++){const c=(x<3&&y<3)||(x>5&&y<3)||(x<3&&y>5);if(c||r()>.5)qr+=`<rect x="${64+x*8}" y="${28+y*8}" width="8" height="8" fill="${K}"/>`}}
+const PROJ=[
+ {t:'Valentines Invitation',tools:['HTML','CSS','JavaScript'],cat:'Web',d:'An animated invitation page with an envelope that opens to reveal the message. My first project with CSS animations.',svg:S(`<rect x="50" y="40" width="100" height="70" rx="6" fill="${W}" ${st}/><path d="M50 44l50 36 50-36" fill="none" ${st}/><path d="M100 30c-6-12-24-8-22 6 2 10 22 20 22 20s20-10 22-20c2-14-16-18-22-6Z" fill="${R}" ${st}/>`)},
+ {t:'Point of Sale',tools:['Java','MySQL'],cat:'Systems',d:'A cashier system that adds items to an order, computes totals and change, and saves each sale to a database.',svg:S(`<rect x="36" y="30" width="90" height="62" rx="6" fill="${W}" ${st}/><rect x="46" y="40" width="70" height="26" fill="${P}"/><text x="52" y="58" font-size="13" fill="${K}">₱ 249.00</text><rect x="30" y="92" width="102" height="18" rx="4" fill="${L}" ${st}/><path d="M142 36h30v72l-5-4-5 4-5-4-5 4-5-4-5 4Z" fill="${W}" ${st}/><path d="M148 50h18M148 60h18M148 70h12" stroke="var(--muted)" stroke-width="2"/>`)},
+ {t:'Calculator',tools:['HTML','CSS','JavaScript'],cat:'Web',d:'A calculator with keyboard support and a clear history display.',svg:S(`<rect x="66" y="18" width="68" height="106" rx="10" fill="${W}" ${st}/><rect x="76" y="28" width="48" height="20" rx="3" fill="${K}"/>${[0,1,2,3].map(r=>[0,1,2].map(c=>`<rect x="${78+c*16}" y="${56+r*16}" width="12" height="12" rx="3" fill="${c==2?A:P}"/>`).join('')).join('')}`)},
+ {t:'Pixel Runner',tools:['Unity','C#'],cat:'Games',d:'A side-scrolling platformer where you jump over blocks and collect coins.',svg:S(`<rect y="104" width="200" height="36" fill="var(--sand)"/>${[...Array(10)].map((_,i)=>`<rect x="${i*20}" y="104" width="20" height="10" fill="${P}" stroke="${K}" stroke-width="1.5"/>`).join('')}<rect x="54" y="72" width="20" height="24" fill="${R}" ${st}/><rect x="58" y="62" width="14" height="12" fill="${W}" ${st}/><circle cx="120" cy="60" r="8" fill="#FFD66B" ${st}/><circle cx="150" cy="48" r="8" fill="#FFD66B" ${st}/><rect x="160" y="84" width="20" height="20" fill="${L}" ${st}/>`,'var(--lilac-tint)')},
+ {t:'Memory Match',tools:['Python','Pygame'],cat:'Games',d:'A card-flipping memory game with a timer and best-score tracking.',svg:S(`${[0,1,2].map(c=>[0,1].map(r=>`<rect x="${42+c*42}" y="${22+r*50}" width="34" height="44" rx="5" fill="${(c+r)%3==0?W:A}" ${st}/>`).join('')).join('')}<text x="59" y="52" font-size="20" text-anchor="middle" fill="${R}">♥</text><text x="143" y="102" font-size="20" text-anchor="middle" fill="${R}">♥</text>`)},
+ {t:'Library System',tools:['Java','MySQL'],cat:'Systems',d:'Tracks books, borrowers and due dates, with search and overdue lists.',svg:S(`<rect x="30" y="104" width="140" height="8" fill="var(--sand)" ${st}/>${[[A,36,60],[P,52,48],[L,68,64],[W,84,54],[R,100,58]].map(([c,x,h])=>`<rect x="${x}" y="${104-h}" width="14" height="${h}" fill="${c}" ${st}/>`).join('')}<circle cx="160" cy="44" r="14" fill="${W}" ${st}/><path d="m170 54 10 10" ${st}/>`)},
+ {t:'QR Attendance',tools:['Python','OpenCV'],cat:'Systems',d:'Students scan a personal QR code and their attendance is logged with the time.',svg:S(`<rect x="56" y="20" width="88" height="88" rx="6" fill="${W}" ${st}/>${qr}<circle cx="150" cy="104" r="16" fill="${A}" ${st}/><path d="m142 104 6 6 10-12" stroke="var(--on-accent)" stroke-width="3" fill="none"/>`)},
+ {t:'Shopping Cart',tools:['HTML','CSS','JavaScript'],cat:'Web',d:'A product list where you add items to a cart, change quantities and see the total update.',svg:S(`<path d="M30 34h18l14 50h70l12-36H56" fill="none" ${st}/><rect x="62" y="44" width="24" height="24" rx="3" fill="${L}" ${st}/><rect x="92" y="38" width="28" height="30" rx="3" fill="${P}" ${st}/><circle cx="72" cy="100" r="8" fill="${W}" ${st}/><circle cx="122" cy="100" r="8" fill="${W}" ${st}/><circle cx="160" cy="34" r="12" fill="${A}" ${st}/><text x="160" y="39" text-anchor="middle" fill="var(--on-accent)" font-size="13">3</text>`)},
+ {t:'Grade Averager',tools:['Python'],cat:'Systems',d:'Enter grades per subject and it computes the weighted average and equivalent grade.',svg:S(`<path d="M34 112h132" ${st}/>${[[50,40,P],[78,62,L],[106,50,P],[134,78,A]].map(([x,h,c])=>`<rect x="${x}" y="${112-h}" width="20" height="${h}" fill="${c}" ${st}/>`).join('')}<rect x="38" y="16" width="44" height="26" rx="5" fill="${W}" ${st}/><text x="60" y="35" font-size="14" text-anchor="middle" fill="${A}">1.25</text>`)},
+ {t:'PasaU',tools:['HTML','CSS','JavaScript'],cat:'Web',d:'A student-only marketplace where students post items to sell. Sign-in is limited to school email addresses.',svg:S(`<path d="M38 50h124l-8-22H46Z" fill="${R}" ${st}/><path d="M38 50q10 12 21 0q10 12 21 0q10 12 21 0q10 12 21 0q10 12 21 0q10 12 20 0" fill="${W}" ${st}/><rect x="46" y="60" width="108" height="52" fill="${W}" ${st}/><rect x="58" y="72" width="30" height="40" fill="${L}" ${st}/><path d="M112 70h28l6 8-6 8h-28Z" fill="${P}" ${st}/><text x="100" y="45" font-size="14" text-anchor="middle" fill="var(--on-accent)">PasaU</text>`)},
+];
+const em=n=>`<svg x="154" y="122" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">${I[n]}</svg>`;
+const C=(c,n)=>`<svg class="thumb" viewBox="0 0 240 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="240" height="200" fill="var(--tint)"/><rect x="30" y="30" width="180" height="130" rx="6" fill="${W}" ${st}/><rect x="40" y="40" width="160" height="110" rx="3" fill="none" stroke="${c}" stroke-width="2" stroke-dasharray="4 3"/><path d="M70 62h100M80 76h80" stroke="${K}" stroke-width="3"/><path d="M84 96h72M92 106h56" stroke="${L}" stroke-width="3"/><path d="M160 140l-8 30 14-8 14 8-8-30" fill="${c}" ${st}/><circle cx="166" cy="134" r="18" fill="${c}" ${st}/>${em(n)}</svg>`;
+const CERT=[['SHS Work Immersion','Completed my senior high work immersion, applying ICT skills in a real workplace: troubleshooting, encoding and helping staff with daily tasks.','Senior High School',C('#A8406A','brief')],['TESDA Certificates','National skills certification from TESDA, proving hands-on ability in computer systems setup and servicing.','TESDA',C('#9C7E72','star')],['PasaU Certificates','Recognition for PasaU, my student-only marketplace project, from planning and design to a working prototype.','Project recognition',C('#E07FA3','trophy')],['Cheerleading','Member of the school cheerleading squad. Competitions taught me discipline, timing and trusting my team.','Extracurricular',C('#7E6BC4','heart')]];
+$('#cgrid').innerHTML=CERT.map(([t,d,y,s])=>`<article class="ccard">${s}<div class="d"><h3>${t}</h3><p>${d}</p><div class="yr">${y}</div></div></article>`).join('');
+
+const TS=[['code','Web',['HTML','CSS','JavaScript'],'Responsive layouts, forms and small interactive pages'],['git','Programming',['Python','Java','C#'],'OOP basics, file handling and simple games'],['folder','Databases',['MySQL'],'Tables and CRUD queries for the POS and library systems'],['star','Design tools',['Canva','Figma'],'Wireframes, mockups and posters']];
+const SS=[['chat','Communication','Explaining ideas clearly to classmates and clients'],['heart','Teamwork','Group projects and a cheerleading squad'],['target','Time management','Balancing school, training and projects'],['user','Adaptability','Picking up new tools quickly when a project needs them']];
+$('#tech').innerHTML=TS.map(([i,t,a,d])=>`<div><h3>${ico(i,24)}${t}</h3><div class="tags">${a.map(x=>`<span class="tag">${x}</span>`).join('')}</div><p>${d}</p></div>`).join('');
+$('#soft').innerHTML=SS.map(([i,t,d])=>`<div><h3>${ico(i,24)}${t}</h3><p style="margin-top:0">${d}</p></div>`).join('');
+
+const SO=[['chat','Facebook','Nicole CE',''],['git','GitHub','@nekuuul','https://github.com/nekuuul'],['camera','Instagram','@nekuuul','https://www.instagram.com/nekuuul/'],['mail','Email','nicolecedades@gmail.com',''],['note','TikTok','@nekuuul','https://www.tiktok.com/@nekuuul'],['headset','Discord','@hopeean',''],['brief','LinkedIn','@nekuuul',''],['mail','Email (alt)','guqswrte@gmail.com','']];
+$('#socials').innerHTML=SO.map(([i,n,h,u])=>u?`<a class="social" href="${u}" target="_blank" rel="noopener"><span class="icbox">${ico(i,20)}</span><span style="min-width:0"><b>${n}</b><small>${h}</small></span></a>`:`<div class="social"><span class="icbox">${ico(i,20)}</span><span style="min-width:0"><b>${n}</b><small>${h}</small></span></div>`).join('');
+
+// projects + filters
+let filt='All';
+const renderP=()=>{$('#pgrid').innerHTML=PROJ.map((p,i)=>(filt=='All'||p.cat==filt)?`<button class="pcard" data-p="${i}" aria-label="${p.t}, view details">${p.svg}<span class="t"><b>${p.t}</b><small>${p.tools.join(' · ')}</small></span></button>`:'').join('');};
+$('#filters').innerHTML=['All','Web','Systems','Games'].map(f=>`<button type="button" aria-pressed="${f==filt}" data-f="${f}">${f}</button>`).join('');
+$('#filters').addEventListener('click',e=>{const b=e.target.closest('[data-f]');if(!b)return;filt=b.dataset.f;$$('#filters button').forEach(x=>x.setAttribute('aria-pressed',x===b));renderP();});
+renderP();
+let lastFocus=null;
+const openP=i=>{const p=PROJ[i];lastFocus=document.activeElement;$('#m-file').textContent=p.t.toLowerCase().replace(/\s+/g,'_');$('#m-thumb').innerHTML=p.svg;$('#m-title').textContent=p.t;$('#m-tags').innerHTML=p.tools.map(x=>`<span class="tag">${x}</span>`).join('')+`<span class="tag l">${p.cat}</span>`;$('#m-desc').textContent=p.d;$('#modal').hidden=false;$('#m-close').focus();};
+const closeP=()=>{$('#modal').hidden=true;lastFocus&&lastFocus.focus();};
+$('#pgrid').addEventListener('click',e=>{const c=e.target.closest('[data-p]');if(c)openP(+c.dataset.p)});
+$('#m-close').onclick=closeP;$('#modal').addEventListener('click',e=>{if(e.target.id=='modal')closeP()});
+document.addEventListener('keydown',e=>{if(e.key=='Escape'&&!$('#modal').hidden)closeP()});
+$$('[data-open]').forEach(a=>a.addEventListener('click',()=>setTimeout(()=>openP(+a.dataset.open),50)));
+
+// routing
+const links=$('#links');
+links.innerHTML=VIEWS.map(([k,l])=>`<li><a href="#${k}" data-v="${k}">${l}</a></li>`).join('');
+const show=()=>{let k=(location.hash||'#home').slice(1);if(k=='main')return;if(!VIEWS.some(v=>v[0]==k))k='home';VIEWS.forEach(([v])=>$('#v-'+v).hidden=v!==k);$$('#links a').forEach(a=>a.dataset.v==k?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current'));links.classList.remove('open');$('#burger').setAttribute('aria-expanded','false');window.scrollTo(0,0);document.title=(k=='home'?'':VIEWS.find(v=>v[0]==k)[1]+' · ')+'NCE Portfolio';};
+window.addEventListener('hashchange',show);show();
+$('#burger').onclick=()=>{const o=links.classList.toggle('open');$('#burger').setAttribute('aria-expanded',o);};
+
+// theme toggle
+const root=document.documentElement;
+const isDark=()=>root.dataset.theme?root.dataset.theme=='dark':matchMedia('(prefers-color-scheme: dark)').matches;
+const paint=()=>{$('#theme').innerHTML=ico(isDark()?'sun':'moon',18)};
+try{const t=localStorage.getItem('nce-theme');if(t)root.dataset.theme=t}catch(e){}
+paint();
+$('#theme').onclick=()=>{root.dataset.theme=isDark()?'light':'dark';try{localStorage.setItem('nce-theme',root.dataset.theme)}catch(e){}paint();};
+
+// contact form: validates, then hands off to email (no server)
+const TO='nicolecedades@gmail.com';
+$('#form').addEventListener('submit',e=>{
+  e.preventDefault();
+  const f={name:$('#f-name'),email:$('#f-email'),msg:$('#f-msg')};
+  const errs={name:f.name.value.trim()?'':'Please enter your name.',email:/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(f.email.value.trim())?'':'Please enter a full email address, like name@gmail.com.',msg:f.msg.value.trim().length>=5?'':'Please write a short message (at least 5 characters).'};
+  let first=null;
+  for(const k in errs){f[k].setAttribute('aria-invalid',!!errs[k]);$('#e-'+k).textContent=errs[k];if(errs[k]&&!first)first=f[k];}
+  if(first){first.focus();$('#sent').hidden=true;return;}
+  const body=`${f.msg.value.trim()}\n\n— ${f.name.value.trim()} (${f.email.value.trim()})`;
+  const href=`mailto:${TO}?subject=${encodeURIComponent('Portfolio message from '+f.name.value.trim())}&body=${encodeURIComponent(body)}`;
+  const s=$('#sent');s.hidden=false;
+  s.innerHTML=`<b>Almost done!</b> Your message is ready. <a href="${href}">Open it in your email app</a>, or copy it and send it to <b style="user-select:all">${TO}</b>.<div class="copy"><button type="button" class="btn sec" id="copybtn" style="padding:8px 14px;font-size:.85rem">Copy message</button> <span id="copied" style="font-size:.85rem;color:var(--muted)"></span></div>`;
+  $('#copybtn').onclick=()=>{navigator.clipboard.writeText(body).then(()=>$('#copied').textContent='Copied.').catch(()=>{f.msg.select();$('#copied').textContent='Selected. Press Ctrl+C to copy.';});};
+});
+})();
+</script>
+
+</body>
+</html>
